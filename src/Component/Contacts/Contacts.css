@@ -1,0 +1,214 @@
+.sideBar{
+    position: absolute;
+    width: 231px;
+    height: 1117px;
+    left: 0px;
+    top: 0px;
+
+background: #CEF3FF;
+}
+.container{
+    position: relative;
+    width: 1728px;
+    height: 1117px;
+
+    background: #FFFFFF;
+}
+.header{
+    position: absolute;
+width: 1497px;
+height: 98px;
+left: 231px;
+top: 0px;
+
+background: #FFFFFF;
+}
+.contacts{
+    position: absolute;
+width: 1449px;
+height: 898px;
+left: 255px;
+top: 124px;
+
+background: #FBFBFB;
+border-radius: 15px;
+}
+table{
+    border-collapse: collapse;
+    border: 2px solid #ccc;
+    padding: 5%;
+    position: relative;
+    width: 1050px;
+}
+thead{
+    width: 1409px;
+height: 60px;
+left: 275px;
+top: 207px;
+
+background: #B3DFFF;
+box-shadow: inset -1px -1px 20px rgba(254, 134, 39, 0.1), inset 1px 1px 20px rgba(254, 134, 39, 0.1);
+border-radius: 10px;
+}
+.logo{
+    position: absolute;
+width: 83px;
+height: 61px;
+left: 24px;
+top: 28px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 600;
+font-size: 40px;
+line-height: 61px;
+/* identical to box height */
+
+
+color: #0884FF;
+}
+.vector{
+    position: absolute;
+    left: 12.5%;
+    right: 13.5%;
+    top: 13%;
+    bottom: 8.33%;
+
+}
+.dashboard{
+    position: absolute;
+width: 84px;
+height: 27px;
+left: 60px;
+top: 141px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 600;
+font-size: 18px;
+line-height: 27px;
+display: flex;
+align-items: center;
+
+color: #181818;
+}
+.totalcontacts{
+    position: absolute;
+width: 183px;
+height: 65px;
+left: 24px;
+top: 203px;
+
+background: #2DA5FC;
+border-radius: 6px;
+}
+.ttlcnts{
+   
+    position: absolute;
+    width: auto;
+    height: 27px;
+    left: 43px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+    top: 12px;
+
+
+}
+.person{
+    position: absolute;
+    left: 8.31%;
+    right: 96.53%;
+    top: 20.05%;
+    bottom: 77.8%;
+
+}
+.heading{
+    position: absolute;
+    width: auto;
+    height: 49px;
+    left: 20px;
+    top: 25px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 49px;
+    color: #454545;
+    opacity: 0.8;
+}
+.searchbar{
+    position: absolute;
+    width: 522px;
+    height: 50px;
+    left: 885px;
+    top: 24px;
+    background: #F2F2F2;
+    border-radius: 6px;
+    left: 340px
+}
+.lens{
+    position: absolute;
+    left: 5%;
+    top: 30.58%;
+    
+
+
+}
+.searchText{
+    border: 1px solid #ccc;
+    width: 80%;
+    height: 90%;
+    margin-left: 20%;
+}
+.fns{
+    width: 100%;
+    position: relative;
+    bottom: 1%
+
+}
+.delete{
+    
+width: 139px;
+height: 41px;
+left: 1245px;
+top: 147px;
+
+background: #FFFFFF;
+box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+}
+.import{
+   
+    width: 135px;
+    height: 41px;
+    
+    background: #FFFFFF;
+    box-shadow: 1px 1px 20px rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    position: relative;
+    left: 5px;
+}
+.deleteimg{
+    right: 14%;
+    top: 12.32%;
+    bottom: 84.24%;
+    position: relative;
+
+
+}
+.importimg{
+    
+
+    right: 14%;
+    top: 12.32%;
+    bottom: 84.24%;
+    position: relative;
+
+
+
+}
+
