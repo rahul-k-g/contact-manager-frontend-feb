@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dots from "../SignIn/dots";
 const SignUp = () => {
     const [userDetails, setUserDetails] = useState({
@@ -13,7 +13,7 @@ const SignUp = () => {
 
     const [error, setError] = useState({ email_Err: "", password_Err: "", confirmPassword: "" })
 
-
+    const navigate = useNavigate()
     const submitHandler = (e) => {
         e.preventDefault();
         // console.log(userDetails)
@@ -36,7 +36,25 @@ const SignUp = () => {
         else {
             setError((oldData) => ({ ...oldData, password_Err: "" }))
         }
-
+        fetch('http://localhost:4000/api/v1/register', {
+            method: "POST",
+            body: JSON.stringify(userDetails),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => {
+            return res.json()
+        }).then((data) => {
+            if (data.status === "Success") {
+                alert("user created successfully and please login now")
+                navigate('/login')
+            }
+            else {
+                alert(data.message)
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
    
      }
 
@@ -62,13 +80,13 @@ const SignUp = () => {
                             
                             <p className="para signUpPara">Create New account</p>
                             <form className="form" onSubmit={submitHandler}>
-                                <input className="email" type="text" name="email" onChange={(event) => { setUserDetails({ ...userDetails, email: event.target.value }) }} placeholder="Email Id"></input>
+                                <input className="email" type="text" name="email" onChange={(event) => { setUserDetails({ ...userDetails, email: event.target.value }) }} placeholder="Email Id" required/>
                                 <div className="eye-div">
-                                <input className="password" type={isRevealed ? "text" : "password"} name="password" onChange={(event) => { setUserDetails({ ...userDetails, password: event.target.value }) }} placeholder="password"></input>
+                                <input className="password" type={isRevealed ? "text" : "password"} name="password" onChange={(event) => { setUserDetails({ ...userDetails, password: event.target.value }) }} placeholder="password" required/>
                                 <img id="hide" src="../images/eye1.png" alt="eyecon" onClick={() => setIsReaveled(prevState => !prevState)} />
                                 </div>
                                 <div className="eye-div">
-                                <input className="password confirmPassword" id="eyeCon" type={pwd ? "text" : "password"} name="confirmPassword" onChange={(event) => { setUserDetails({ ...userDetails, confirmPassword: event.target.value }) }} placeholder="confirmPassword"></input>
+                                <input className="password confirmPassword" id="eyeCon" type={pwd ? "text" : "password"} name="confirmPassword" onChange={(event) => { setUserDetails({ ...userDetails, confirmPassword: event.target.value }) }} placeholder="confirmPassword" required/>
                                 <img id="hidez" src="../images/eye1.png" alt="eyecon" onClick={() => setpwd(prevState => !prevState)} />
                                 </div>
                                 <input type="submit" className="signUp signUpRe" value="Sign Up" />

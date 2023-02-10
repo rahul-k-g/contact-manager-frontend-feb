@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import "./SignIn.css"
 import React from "react";
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Dots from "../SignIn/dots";
-
+import { useNavigate } from "react-router-dom"
 
 
 const SignIn = () => {
@@ -19,7 +19,7 @@ const SignIn = () => {
         password: ""
     })
 
-   
+    const navigate = useNavigate()
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -39,6 +39,39 @@ const SignIn = () => {
         }
         // console.log(error)
 
+        setLoader(true)
+        fetch('http://localhost:4000/api/v1/login', {
+            method: "POST",
+            body: JSON.stringify(userDetails),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((res) => {
+            return res.json()
+        }).then((data) => {
+
+            if (data.status == "Password not matched") {
+                console.log("from  Password not matched")
+                setUserNotReg((prevData) => ({ ...prevData, wrongPassword: data.message }))
+            } else {
+                setUserNotReg((prevData) => ({ ...prevData, wrongPassword: "" }))
+            }
+
+            if (data.status === "Failed") {
+                setUserNotReg((prevData) => ({ ...prevData, newUser: data.message }))
+            } else {
+                setUserNotReg((prevData) => ({ ...prevData, newUser: "" }))
+                localStorage.setItem("token", data.token)
+                localStorage.setItem("userInfo", JSON.stringify({email:userDetails.email}))
+                navigate("/dashBoard")
+            }
+ 
+
+        }).catch((err) => {
+            console.log(err)
+        }).finally(() => {
+            setLoader(false)
+        })
     }
     // 
     return (
@@ -71,7 +104,7 @@ const SignIn = () => {
                                 <br></br>
                                 <input type="submit" className="signIn" value="Sign In" /><br />
                             </form>
-                        
+
                             <Link to="/register"><button className="signUp">Sign Up</button></Link>
                             {loader && <div className="loader-div"><img src="./images/Loading_icon.gif" alt="Loading_icon" /></div>}
 
