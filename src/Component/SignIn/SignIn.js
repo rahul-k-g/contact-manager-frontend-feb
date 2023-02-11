@@ -12,7 +12,7 @@ const SignIn = () => {
     let [userNotReg, setUserNotReg] = useState({
         wrongPassword: "",
         newUser: ""
-    })
+    }) 
     const [error, setError] = useState({ email_Err: "", password_Err: "" })
     const [userDetails, setUserDetails] = useState({
         email: "",
@@ -49,7 +49,7 @@ const SignIn = () => {
         }).then((res) => {
             return res.json()
         }).then((data) => {
-
+           console.log(data)
             if (data.status == "Password not matched") {
                 console.log("from  Password not matched")
                 setUserNotReg((prevData) => ({ ...prevData, wrongPassword: data.message }))

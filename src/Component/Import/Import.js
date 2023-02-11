@@ -1,89 +1,59 @@
 
-    import React, { useState } from "react";
-  // require("./Import")
-   function Import() {
-     const [file, setFile] = useState();
-     const [array, setArray] = useState([]);
-   
-     const fileReader = new FileReader();
-   
-     const handleOnChange = (e) => {
-       setFile(e.target.files[0]);
-     };
-   
-     const csvFileToArray = string => {
-       const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
-       const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
-   
-       const array = csvRows.map(i => {
-         const values = i.split(",");
-         const obj = csvHeader.reduce((object, header, index) => {
-           object[header] = values[index];
-           return object;
-         }, {});
-         return obj;
-       });
-   
-       setArray(array);
-     };
-   
-     const handleOnSubmit = (e) => {
-       e.preventDefault();
-   
-       if (file) {
-         fileReader.onload = function (event) {
-           const text = event.target.result;
-           csvFileToArray(text);
-         };
-   
-         fileReader.readAsText(file);
-       }
-     };
-   
-     const headerKeys = Object.keys(Object.assign({}, ...array));
-   
-     return (
-       <div style={{ textAlign: "center" }}>
-         <h1>REACTJS CSV IMPORT EXAMPLE </h1>
-         <form>
-           <input
-             type={"file"}
-             id={"csvFileInput"}
-             accept={".csv"}
-             onChange={handleOnChange}
-           />
-   
-           <button
-             onClick={(e) => {
-               handleOnSubmit(e);
-             }}
-           >
-             IMPORT CSV
-           </button>
-         </form>
-   
-         <br />
-   
-         <table>
-           <thead>
-             <tr key={"header"}>
-               {headerKeys.map((key) => (
-                 <th>{key}</th>
-               ))}
-             </tr>
-           </thead>
-   
-           <tbody>
-             {array.map((item) => (
-               <tr key={item.id}>
-                 {Object.values(item).map((val) => (
-                   <td>{val}</td>
-                 ))}
-               </tr>
-             ))}
-           </tbody>
-         </table>
-       </div>
-     );
-   }
- export default Import
+import React from "react";
+import { useState } from "react";
+import './Import.css'
+import axios from "axios";
+import { parse } from "papaparse";
+
+const Importpopup = props => {
+
+  const [highlighted, setHighlighted] = React.useState(false)
+  const [contacts, setContacts] = React.useState([])
+  const [imports, setImports] = useState(false);
+  return (
+    <div className={`popup-box ${highlighted ? "highlighted": "nothighlighted"}`}
+      onDragEnter={() => { setHighlighted(true) }}
+      onDragLeave={() => { setHighlighted(false) }}
+      onDragOver={(e) => { e.preventDefault() }} onDrop={(e) => {
+        e.preventDefault()
+        setHighlighted(false)
+        console.log(e.dataTransfer.files)
+      
+        Array.from(e.dataTransfer.files).filter(file => file.type === "text/csv")
+          .forEach(async (file) => { 
+            const text= await file.text();
+            const result = parse(text,{header:true})
+           
+           let payload = {
+            importedData: result.data
+        };
+            axios.post("http://localhost:4000/api/v1/contacts/",payload,
+            
+            { 
+              
+              headers: { "Authorization": localStorage.getItem("token") }
+
+          }
+           
+          )
+              .then(res => {
+                console.log(res);
+                console.log(res.data);
+                props.importfn(!imports)
+                props.getDatas()
+        
+              })
+              .catch((err) => console.log(err))
+        
+          
+           })
+      }}> 
+
+
+      {props.content}
+       
+    </div>
+  );
+};
+
+export default Importpopup;

@@ -4,4 +4,4 @@ const ProRoutes=()=>{
         localStorage.getItem('token') ? <Outlet/> :<Navigate to = "/login"/>
     )
 }
-export default ProRoutes;
+export default ProRoutes; 
