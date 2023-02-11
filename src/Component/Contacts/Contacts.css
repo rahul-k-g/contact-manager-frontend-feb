@@ -211,4 +211,13 @@ border-radius: 10px;
 
 
 }
+#logout-button{
+    border-radius: 20%;
+}
+#logout-button>img{
+margin: auto;
+position: absolute;
+width: 5px;
+height: -20px;
 
+}

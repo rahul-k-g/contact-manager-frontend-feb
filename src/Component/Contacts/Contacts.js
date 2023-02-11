@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import React from "react";
-import cors from "react"
+import { useNavigate } from "react-router-dom";
 import "./Contacts.css"
 
 function Contacts() {
-
+    const navigate = useNavigate();
     var [detail,setdetail] = useState([])
     var [search,setSearch] = useState([])
     React.useEffect(() => {
@@ -99,7 +99,11 @@ function Contacts() {
       </table>
       </div>
       </div>
-      
+      <div id='logout-button'>
+                <button onClick={()=>{localStorage.clear();navigate("/")}}>
+                <span id='logout-text'> Log out </span>
+                </button>
+            </div>
       </>)
     }    
 export default Contacts;
