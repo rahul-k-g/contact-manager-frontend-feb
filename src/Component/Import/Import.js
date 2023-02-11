@@ -10,32 +10,6 @@ const Importpopup = props => {
   const [highlighted, setHighlighted] = React.useState(false)
   const [contacts, setContacts] = React.useState([])
   const [imports, setImports] = useState(false);
-  const token = localStorage.getItem("token")
-  console.log(token)
-  function handleImport() {
-   
-    axios.post("http://localhost:4000/api/v1/contacts/", {
-       headers: {
-        "content-type" :"application/csv",
-        "Authorization": token
-    },
-      
-      data: {
-          source: contacts
-      }
-  })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        setImports(!imports)
-        props.getDatas()
-
-      })
-      .catch((err) => console.log(err))
-
-  }
-  
-
   return (
     <div className={`popup-box ${highlighted ? "highlighted": "nothighlighted"}`}
       onDragEnter={() => { setHighlighted(true) }}
@@ -54,8 +28,10 @@ const Importpopup = props => {
             importedData: result.data
         };
             axios.post("http://localhost:4000/api/v1/contacts/",payload,
-            {
-              headers: { authorization: props.token }
+            
+            { 
+              
+              headers: { "Authorization": localStorage.getItem("token") }
 
           }
            
@@ -63,7 +39,7 @@ const Importpopup = props => {
               .then(res => {
                 console.log(res);
                 console.log(res.data);
-                setImports(!imports)
+                props.importfn(!imports)
                 props.getDatas()
         
               })

@@ -49,7 +49,7 @@ const SignIn = () => {
         }).then((res) => {
             return res.json()
         }).then((data) => {
-
+           console.log(data)
             if (data.status == "Password not matched") {
                 console.log("from  Password not matched")
                 setUserNotReg((prevData) => ({ ...prevData, wrongPassword: data.message }))

@@ -16,7 +16,7 @@ function Contacts() {
   const [isDeleted,setDeleted] = useState(false)
   const [contacts, setContacts] = React.useState([])
   const token = localStorage.getItem("token")
- console.log(token)
+ console.log(token) 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   }
@@ -30,6 +30,21 @@ function Contacts() {
   
     function getData() { 
     axios('http://localhost:4000/api/v1/contacts', {
+      method: "get",
+      headers: {
+        
+        authorization: token
+    } 
+  }).then((response) => {
+     // setdetail(...detail, response.data.allcontact.reverse());
+     setdetail(response.data.allcontact)
+      console.log(response.data.allcontact)
+    })
+   .catch((err) => console.log(err))
+  }
+ const searchHandle= async ()=> { 
+  const search = document.getElementById("searchText").value;
+  await axios('http://localhost:4000/api/v1/contacts', {
       method: "get",
       headers: {
         'Accept':'application/json',
@@ -124,7 +139,7 @@ function Contacts() {
       <div className="header">
         <span className="heading"> Total Contacts</span>
         <div className="searchbar" >
-          <img className="lens" src="./images/search.png" onClick={(e) => { setSearch(...search, document.getElementById("searchText").value) }} />
+          <img className="lens" src="./images/search.png" onClick={ searchHandle } />
           <input type="text" className="searchText" id="searchText" />
         </div>
 
@@ -140,7 +155,7 @@ function Contacts() {
   <img className="importimg" src="./images/import.png" /> Import</button>
 
         </div>
-        {imports && <Importpopup getDatas={getData} 
+        {imports && <Importpopup getDatas={getData} importfn={setImports}
           content={<>
             <div className="imgbox"><img className="delconfirm" src="./images/dragndrop.png" /></div>
              
