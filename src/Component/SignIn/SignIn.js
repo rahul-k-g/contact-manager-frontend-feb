@@ -12,7 +12,7 @@ const SignIn = () => {
     let [userNotReg, setUserNotReg] = useState({
         wrongPassword: "",
         newUser: ""
-    })
+    }) 
     const [error, setError] = useState({ email_Err: "", password_Err: "" })
     const [userDetails, setUserDetails] = useState({
         email: "",

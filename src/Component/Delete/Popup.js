@@ -5,7 +5,7 @@ const Popup = props => {
     <div className="popup-box">
      
          
-        {props.content}
+        {props.content} 
       
     </div>
   );

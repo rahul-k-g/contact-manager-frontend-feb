@@ -19,7 +19,7 @@ function Contacts() {
  console.log(token) 
   const togglePopup = () => {
     setIsOpen(!isOpen);
-  }
+  } 
   const toggleImport = () => {
     setImports(!imports)
   }

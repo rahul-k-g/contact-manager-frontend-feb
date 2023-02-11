@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Dots from "../SignIn/dots";
-const SignUp = () => {
+const SignUp = () => { 
     const [userDetails, setUserDetails] = useState({
                                                      email: "",
                                                      password: "",
