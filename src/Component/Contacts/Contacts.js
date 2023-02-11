@@ -51,13 +51,19 @@ function Contacts() {
         <span className="dashboard">
           Dashboard
         </span>
+
         </div>
+        
         <div className="totalcontacts">
           <img className="person" src="./images/person.png"/>
           <span className="ttlcnts">Total Contacts</span>
         </div>
-    
-      
+        
+        <div id='logout-button'>
+                <button onClick={()=>{localStorage.clear();navigate("/")}}>
+                <span id='logout-text'><img src="./images/Logout.png"/> Log out </span>
+                </button>
+            </div>
 
       </div>
       <div className="header">
@@ -97,13 +103,12 @@ function Contacts() {
 
         
       </table>
+      
       </div>
+      
       </div>
-      <div id='logout-button'>
-                <button onClick={()=>{localStorage.clear();navigate("/")}}>
-                <span id='logout-text'> Log out </span>
-                </button>
-            </div>
+      
+      
       </>)
     }    
 export default Contacts;
