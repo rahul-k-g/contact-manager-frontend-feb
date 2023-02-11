@@ -211,4 +211,16 @@ border-radius: 10px;
 
 
 }
+#logout-button{
+    border-radius: 20%;
+    position: fixed;
+    top: 90vh;
 
+}
+#logout-button>img{
+margin: auto;
+
+width: 5px;
+height: -20px;
+
+}

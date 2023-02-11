@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import React from "react";
-import cors from "react"
+import { useNavigate } from "react-router-dom";
 import "./Contacts.css"
 import Popup from "../Delete/Popup";
 import Importpopup from "../Import/Import";
 
 function Contacts() {
+<<<<<<< HEAD
 
   var [detail, setdetail] = useState([])
   var [search, setSearch] = useState([])
@@ -32,6 +33,25 @@ function Contacts() {
     axios('http://localhost:4000/api/v1/contacts', {
       method: "get",
       headers: {
+=======
+    const navigate = useNavigate();
+    var [detail,setdetail] = useState([])
+    var [search,setSearch] = useState([])
+    React.useEffect(() => {
+        axios.get('http://localhost:4000/api/v1/contacts').then((response) => {
+          setdetail(...detail,response.data.allcontact.reverse());
+          console.log(response.data.allcontact)
+        });
+      }, []);
+      
+     
+      
+         const DisplayData=detail.map(function (info){
+    
+            return(
+                <tbody id={info._id} key={info._id}>
+                <tr><td><input type="checkbox" /></td> 
+>>>>>>> 3de49968e8d00d8aaff55f56a89a37db2f3ce511
         
         authorization: token
     } 
@@ -122,18 +142,37 @@ function Contacts() {
           <img src="./images/Logo.svg" />
 
         </div>
+<<<<<<< HEAD
         <div>
           <img className="vector" src="./images/vector.png" />
           <span className="dashboard">
             Dashboard
           </span>
+=======
+        <div> 
+        <img className="vector" src="./images/vector.png"/>
+        <span className="dashboard">
+          Dashboard
+        </span>
+
+>>>>>>> 3de49968e8d00d8aaff55f56a89a37db2f3ce511
         </div>
+        
         <div className="totalcontacts">
           <img className="person" src="./images/person.png" />
           <span className="ttlcnts">Total Contacts</span>
         </div>
+<<<<<<< HEAD
 
 
+=======
+        
+        <div id='logout-button'>
+                <button onClick={()=>{localStorage.clear();navigate("/")}}>
+                <span id='logout-text'><img src="./images/Logout.png"/> Log out </span>
+                </button>
+            </div>
+>>>>>>> 3de49968e8d00d8aaff55f56a89a37db2f3ce511
 
       </div>
       <div className="header">
@@ -199,6 +238,7 @@ function Contacts() {
 
           {DisplayData}
 
+<<<<<<< HEAD
 
 
         </table>
@@ -207,4 +247,16 @@ function Contacts() {
 
   </>)
 }
+=======
+        
+      </table>
+      
+      </div>
+      
+      </div>
+      
+      
+      </>)
+    }    
+>>>>>>> 3de49968e8d00d8aaff55f56a89a37db2f3ce511
 export default Contacts;
